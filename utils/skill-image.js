@@ -82,6 +82,7 @@ import linux from "../app/assets/svg/skills/linux.svg";
 import sqlalchemy from "../app/assets/svg/skills/sqlalchemy.svg";
 import fastapi from "../app/assets/svg/skills/fastapi.svg";
 import microsoftSqlServer from "../app/assets/svg/skills/sql-database-generic-svgrepo-com.svg";
+import n8n from "../app/assets/svg/skills/n8n.svg";
 
 export const skillsImage = (skill) => {
   const skillID = skill.toLowerCase();
@@ -258,6 +259,8 @@ export const skillsImage = (skill) => {
       return dotnet;
     case "sql server":
       return microsoftSqlServer;
+    case "n8n":
+      return n8n;
     default:
       break;
   }

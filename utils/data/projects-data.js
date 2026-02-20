@@ -59,6 +59,24 @@ export const projectsData = [
     code: "",
     demo: "",
   },
+  {
+    id: 5,
+    name: "Notification Bot for Teams",
+    description:
+      "Development of a chatbot focused on automating notifications and real-time communication on Microsoft Teams. The system is capable of receiving events from APIs or webhooks and sending intelligent responses or alerts to users and teams. It implements a scalable architecture based on Onion Architecture, integrating a SQL Server database for persistence and Entity Framework for efficient data management. It includes robust backend logic in ASP.NET Core and a decoupled service layer to facilitate maintenance and scalability.",
+    tools: [
+      "C#",
+      ".NET Framework 4.8",
+      "ASP.NET Core",
+      "Entity Framework",
+      "SQL Server",
+      "Arquitectura Onion",
+      "Microsoft Teams",
+    ],
+    role: "Full Stack Developer",
+    code: "",
+    demo: "",
+  },
 ];
 
 // Do not remove any property.

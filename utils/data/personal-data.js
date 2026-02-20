@@ -3,7 +3,7 @@ export const personalData = {
   profile: "/profile.png",
   designation: "Software Developer",
   description:
-    "Software developer with experience in designing and developing cross-platform applications, including desktop, web, and hardware control systems. I combine a solid technical foundation in C#, SQL Server, and HTML/CSS/JavaScript with a results-oriented approach, strong organization, and process optimization.",
+    "Software developer with experience in designing and developing cross-platform applications, including desktop, web and mobile. I combine a solid technical foundation in C#, SQL Server, .NET, HTML/CSS/JavaScript and TypeScript with a results-oriented approach, strong organization, and process optimization.",
   email: "alesandermartinez20@gmail.com",
   phone: "829-957-1105",
   address: "Dominican Republic, Santo Domingo",
@@ -13,7 +13,7 @@ export const personalData = {
   twitter: "",
   stackOverflow: "",
   leetcode: "",
-  devUsername: "said7388", // Default or placeholder to avoid empty string issues
+  devUsername: "wiky43", // Default or placeholder to avoid empty string issues
   resume:
     "https://drive.google.com/file/d/13rdmQA9LQWXWIm57koDeoPIDfkc-WEfL/view?usp=sharing",
 };

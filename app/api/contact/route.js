@@ -97,6 +97,65 @@ const isValidEmail = (email) => {
   return emailRegex.test(email);
 };
 
+async function sendToN8N(payload) {
+  const webhookUrl = process.env.N8N_WEBHOOK_URL;
+
+  if (!webhookUrl) {
+    return { ok: false, message: "N8N webhook URL is missing." };
+  }
+
+  try {
+    await axios.post(webhookUrl, payload, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return { ok: true };
+  } catch (error) {
+    const status = error.response?.status;
+    const n8nMessage = error.response?.data?.message || "";
+    const isPostWebhookNotRegistered =
+      status === 404 &&
+      typeof n8nMessage === "string" &&
+      n8nMessage.includes("POST") &&
+      n8nMessage.toLowerCase().includes("not registered");
+    const shouldTryTestWebhook =
+      process.env.NODE_ENV !== "production" &&
+      status === 404 &&
+      webhookUrl.includes("/webhook/") &&
+      n8nMessage.toLowerCase().includes("not registered");
+
+    if (shouldTryTestWebhook) {
+      const testWebhookUrl = webhookUrl.replace("/webhook/", "/webhook-test/");
+      try {
+        await axios.post(testWebhookUrl, payload, {
+          headers: { "Content-Type": "application/json" },
+        });
+        return { ok: true };
+      } catch (testError) {
+        console.error(
+          "Error sending payload to n8n test webhook:",
+          testError.response?.data || testError.message,
+        );
+      }
+    }
+
+    console.error(
+      "Error sending payload to n8n:",
+      error.response?.data || error.message,
+    );
+    if (isPostWebhookNotRegistered) {
+      return {
+        ok: false,
+        message: "n8n webhook is not registered for POST.",
+      };
+    }
+
+    return {
+      ok: false,
+      message: n8nMessage || "Failed to send payload to n8n webhook.",
+    };
+  }
+}
+
 export async function POST(request) {
   try {
     const ip = request.headers.get("x-forwarded-for") || "unknown";
@@ -145,33 +204,30 @@ export async function POST(request) {
       );
     }
 
-    const token = process.env.TELEGRAM_BOT_TOKEN;
-    const chat_id = process.env.TELEGRAM_CHAT_ID;
-
-    // Validate environment variables
-    if (!token || !chat_id) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Telegram token or chat ID is missing.",
-        },
-        { status: 400 },
-      );
+    let n8nSuccess = false;
+    if (process.env.N8N_WEBHOOK_URL) {
+      const n8nResult = await sendToN8N(payload);
+      n8nSuccess = n8nResult.ok;
     }
 
+    const token = process.env.TELEGRAM_BOT_TOKEN;
+    const chat_id = process.env.TELEGRAM_CHAT_ID;
     const message = `New message from ${name}\n\nEmail: ${email}\n\nMessage:\n\n${userMessage}\n\n`;
 
-    // Send Telegram message
-    const telegramSuccess = await sendTelegramMessage(token, chat_id, message);
+    // Send Telegram message if token and chat_id are present
+    let telegramSuccess = false;
+    if (token && chat_id) {
+      telegramSuccess = await sendTelegramMessage(token, chat_id, message);
+    }
 
     // Send email
     const emailSuccess = await sendEmail(payload, message);
 
-    if (telegramSuccess && emailSuccess) {
+    if (n8nSuccess || telegramSuccess || emailSuccess) {
       return NextResponse.json(
         {
           success: true,
-          message: "Message and email sent successfully!",
+          message: "Message sent successfully!",
         },
         { status: 200 },
       );
@@ -180,7 +236,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         success: false,
-        message: "Failed to send message or email.",
+        message: "Failed to send message.",
       },
       { status: 500 },
     );

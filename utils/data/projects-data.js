@@ -24,7 +24,7 @@ export const projectsData = [
     tools: ["JavaScript", "HTML5", "CSS3"],
     role: "Frontend Developer",
     code: "https://github.com/wiky43/Dealer-Web-front",
-    demo: "",
+    demo: "https://adrz.netlify.app/",
   },
   {
     id: 3,

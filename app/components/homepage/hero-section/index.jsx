@@ -116,11 +116,21 @@ function HeroSection() {
                 <span className="text-gray-400">{"', '"}</span>
                 <span className="text-amber-300">Python</span>
                 <span className="text-gray-400">{"', '"}</span>
-                <span className="text-amber-300">Selenium</span>
+                <span className="text-amber-300">TypeScript</span>
                 <span className="text-gray-400">{"', '"}</span>
-                <span className="text-amber-300">Tkinter</span>
+                <span className="text-amber-300">n8n</span>
                 <span className="text-gray-400">{"', '"}</span>
                 <span className="text-amber-300">Architecture Onion</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Docker</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">GitHub</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Node.js</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">React.js</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Next.js</span>
                 <span className="text-gray-400">{"'],"}</span>
               </div>
               <div>

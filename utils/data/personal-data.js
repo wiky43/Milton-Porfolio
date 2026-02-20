@@ -15,5 +15,5 @@ export const personalData = {
   leetcode: "",
   devUsername: "wiky43", // Default or placeholder to avoid empty string issues
   resume:
-    "https://drive.google.com/file/d/13rdmQA9LQWXWIm57koDeoPIDfkc-WEfL/view?usp=sharing",
+    "https://drive.google.com/file/d/1kBagPE-V0kD1fFi5DrOE4492qtyvcwJH/view?usp=sharing",
 };

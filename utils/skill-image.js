@@ -83,10 +83,15 @@ import sqlalchemy from "../app/assets/svg/skills/sqlalchemy.svg";
 import fastapi from "../app/assets/svg/skills/fastapi.svg";
 import microsoftSqlServer from "../app/assets/svg/skills/sql-database-generic-svgrepo-com.svg";
 import n8n from "../app/assets/svg/skills/n8n.svg";
+import github from "../app/assets/svg/skills/github.svg";
+import nodejs from "../app/assets/svg/skills/nodejs.svg";
+import express from "../app/assets/svg/skills/express.svg";
 
 export const skillsImage = (skill) => {
   const skillID = skill.toLowerCase();
   switch (skillID) {
+    case "n8n":
+      return n8n;
     case "gcp":
       return gcp;
     case "html":
@@ -108,10 +113,12 @@ export const skillsImage = (skill) => {
     case "javascript":
       return javascript;
     case "next js":
+    case "next.js":
       return nextJS;
     case "nuxt js":
       return nuxtJS;
     case "react":
+    case "react.js":
       return react;
     case "svelte":
       return svelte;
@@ -136,6 +143,7 @@ export const skillsImage = (skill) => {
     case "postgresql":
       return postgresql;
     case "tailwind":
+    case "tailwind css":
       return tailwind;
     case "vitejs":
       return vitejs;
@@ -259,8 +267,14 @@ export const skillsImage = (skill) => {
       return dotnet;
     case "sql server":
       return microsoftSqlServer;
-    case "n8n":
-      return n8n;
+    case "github":
+      return github;
+    case "node.js":
+    case "nodejs":
+      return nodejs;
+    case "express":
+    case "express.js":
+      return express;
     default:
       break;
   }
